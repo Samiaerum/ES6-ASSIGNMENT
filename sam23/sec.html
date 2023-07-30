@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- ARROW FUNCTION -->
+    <!-- QUESTION#1 -->
+    <script>
+const numbers = [1, 2, 3, 4, 5];
+
+console.log("Using Arrow Function and forEach():");
+numbers.forEach((element) => {
+  console.log(element * 2);
+});
+const doubledNumbers = numbers.map((element) => element * 2);
+
+console.log("\nUsing Arrow Function and map():");
+console.log(doubledNumbers);
+</script>
+
+    <!-- QUESTION#2 -->
+    <form onsubmit="calculateLength(event)">
+        <label for="stringInput">Enter a string:</label>
+        <input type="text" id="stringInput" required>
+        <button type="submit">Calculate Length</button>
+      </form>
+      <p>Length of the string: <span id="result">-</span></p>
+    
+      <script>
+        const getStringLength = (str) => str.length;
+    
+        function calculateLength(event) {
+          event.preventDefault();
+    
+          const inputString = document.getElementById('stringInput').value;
+          const length = getStringLength(inputString);
+    
+          document.getElementById('result').textContent = length;
+        }
+      </script>
+    <!-- QUESTION#3 -->
+    <form onsubmit="multiplyNumbers(event)">
+        <label for="number1Input">Enter the first number:</label>
+        <input type="number" id="number1Input" required>
+        <br>
+        <label for="number2Input">Enter the second number:</label>
+        <input type="number" id="number2Input" required>
+        <br>
+        <button type="submit">Calculate Product</button>
+      </form>
+      <p>Product: <span id="prdct">-</span></p>
+    
+      <script>
+        const multiply = (num1, num2) => num1 * num2;
+    
+        function multiplyNumbers(event) {
+          event.preventDefault();
+    
+          const num1 = parseFloat(document.getElementById('number1Input').value);
+          const num2 = parseFloat(document.getElementById('number2Input').value);
+    
+          const product = multiply(num1, num2);
+    
+          document.getElementById('prdct').textContent = product;
+        }
+      </script>
+    <!-- QUESTION#4 -->
+    <label for="numbersInput">Enter numbers (comma-separated):</label>
+  <br>
+  <input type="text" id="numbersInput" oninput="calculateAverage()">
+  <br>
+  <p>Average: <span id="avg">-</span></p>
+
+  <script>
+    const calculateAverage = () => {
+      const numbersInput = document.getElementById('numbersInput').value;
+      const average = calculateAverageFromString(numbersInput);
+
+      document.getElementById('avg').textContent = average;
+    };
+
+    const calculateAverageFromString = (numbers) => {
+      const numberArray = numbers.split(',').map(num => parseFloat(num.trim()));
+      if (numberArray.length === 0 || numberArray.some(isNaN)) return 0;
+      const sum = numberArray.reduce((total, num) => total + num, 0);
+      return sum / numberArray.length;
+    };
+    </script>
+    <!-- QUESTION#5 -->
+    <label for="name-input">Enter your name:</label>
+  <input type="text" id="name-input">
+  <button id="greet-button">Greet</button>
+  <div id="greeting-container"></div>
+
+  <script type="module">
+    const greet = (name) => {
+      return `Hello, ${name}!`;
+    };
+    const greetButton = document.getElementById('greet-button');
+    greetButton.addEventListener('click', () => {
+      const nameInput = document.getElementById('name-input');
+      const name = nameInput.value.trim();
+
+      if (name) {
+        const greeting = greet(name);
+        const greetingContainer = document.getElementById('greeting-container');
+        greetingContainer.innerHTML = `<p>${greeting}</p>`;
+      } else {
+        alert("Please enter a valid name.");
+      }
+    });
+  </script>
+    <!-- QUESTION#6 -->
+    <h1>Random Number Generator</h1>
+    <button id="generate-button">Generate Random Number</button>
+    <p id="random-number"></p>
+  
+    <script>
+      const getRandomNumber = () => Math.random();
+  
+      const generateButton = document.getElementById('generate-button');
+      const randomNumberDisplay = document.getElementById('random-number');
+  
+      generateButton.addEventListener('click', () => {
+        const randomNumber = getRandomNumber();
+        randomNumberDisplay.textContent = `Random Number: ${randomNumber}`;
+      });
+    </script>
+</body>
+</html>

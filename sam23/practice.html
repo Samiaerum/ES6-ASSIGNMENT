@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- //////////DEFAULT, REST & SPREAD -->
+  <!--- QUESTION#1  -->
+
+  <label for="num1">Enter number 1:</label>
+  <input type="number" id="num1" value="0">
+  <br>
+  <label for="num2">Enter number 2:</label>
+  <input type="number" id="num2" value="0">
+  <br>
+  <button onclick="calculateSum()">Calculate Sum</button>
+  <p>Result: <span id="result">-</span></p>
+   <script>
+
+const sumNumbers = (num1 = 0, num2 = 0) => num1 + num2;
+
+    function calculateSum() {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const num2 = parseFloat(document.getElementById('num2').value);
+      const result = sumNumbers(num1, num2);
+      document.getElementById('result').textContent = result;
+    }
+  </script>
+
+    <!--- QUESTION#2  -->
+          <button onclick="displayArguments()">Get Arguments</button>
+          <p>Result: <span id="result">-</span></p>
+        
+          <script>
+            // ES6 version with rest parameters
+            function getArguments(...args) {
+              return args;
+            }
+        
+            function displayArguments() {
+              const argumentsArray = getArguments(1, 'hello', true, [1, 2, 3]);
+              document.getElementById('result').textContent = JSON.stringify(argumentsArray);
+            }
+          </script>
+
+
+    <!--- QUESTION#3  -->
+    <label for="numberInput">Enter a number:</label>
+  <input type="number" id="numberInput">
+  <button onclick="calculate()">Calculate</button>
+  <p>Result: <span id="result">-</span></p>
+
+  <script>
+    function calculate() {
+      const userInput = document.getElementById('numberInput').value;
+
+      const numberValue = parseFloat(userInput);
+      document.getElementById('result').textContent = numberValue;
+    }
+  </script>
+
+        <!-- QUESTION#4 -->
+        <label for="array1Input">Enter array 1 (comma-separated):</label>
+        <input type="text" id="array1Input">
+        <br>
+        <label for="array2Input">Enter array 2 (comma-separated):</label>
+        <input type="text" id="array2Input">
+        <br>
+        <button onclick="concatenateArrays()">Concatenate Arrays</button>
+        <p>Result: <span id="result">-</span></p>
+      
+        <script>
+          function concatenateArrays() {
+            const array1 = document.getElementById('array1Input').value.split(',').map(item => parseFloat(item.trim()));
+            const array2 = document.getElementById('array2Input').value.split(',').map(item => parseFloat(item.trim()));
+      
+            if (array1.some(isNaN) || array2.some(isNaN)) {
+              document.getElementById('result').textContent = "Invalid input, please enter valid arrays of numbers.";
+            } else {
+              const resultArray = [...array1, ...array2];
+              document.getElementById('result').textContent = resultArray.toString();
+            }
+          }
+          </script>
+
+
+      <!-- QUESTION#5 -->
+<form onsubmit="processInput(event)">
+  <label for="nameInput">Name:</label>
+  <input type="text" id="nameInput" required>
+  <br>
+  <label for="ageInput">Age:</label>
+  <input type="number" id="ageInput" required>
+  <br>
+  <label for="occupationInput">Occupation:</label>
+  <input type="text" id="occupationInput" required>
+  <br>
+  <button type="submit">Submit</button>
+</form>
+<p>Result:</p>
+<pre id="result"></pre>
+
+<script>
+  function addIdToObject(person) {
+    const id = generateUniqueId(); 
+    return { ...person, id };
+  }
+
+  function generateUniqueId() {
+    return Math.random().toString(36).substr(2, 9);
+  }
+
+  function processInput(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('nameInput').value;
+    const age = parseInt(document.getElementById('ageInput').value);
+    const occupation = document.getElementById('occupationInput').value;
+
+    const inputObject = { name, age, occupation };
+    const resultObject = addIdToObject(inputObject);
+
+    document.getElementById('result').textContent = JSON.stringify(resultObject, null, 2);
+  }
+</script>
+</body>
+</html>
